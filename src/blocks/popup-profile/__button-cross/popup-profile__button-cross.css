@@ -1,0 +1,5 @@
+@media (max-width: 767px) {
+  .popup-profile__button-cross {
+    right: 0px;
+  }
+}

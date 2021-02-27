@@ -1,0 +1,5 @@
+.card__like {
+  height: 20px;
+  width: 20px;
+  background: #fff url("../../../images/heart.svg") center/contain no-repeat;
+}

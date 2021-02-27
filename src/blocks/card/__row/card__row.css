@@ -1,0 +1,9 @@
+.card__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 25px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 86px;
+}

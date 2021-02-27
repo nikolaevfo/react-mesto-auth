@@ -1,0 +1,11 @@
+.form-page__text-error{
+  display: block;
+  height: 30px;
+  width: 100%;
+  
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+}

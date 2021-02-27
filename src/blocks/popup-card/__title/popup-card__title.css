@@ -1,0 +1,7 @@
+@media (max-width: 424px) {
+  .popup-card__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 20px;
+  }
+}

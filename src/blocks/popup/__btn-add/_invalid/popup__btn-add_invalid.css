@@ -1,0 +1,10 @@
+.popup__btn-add_invalid {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+  opacity: 0.2;
+}
+.popup__btn-add_invalid:hover {
+  background: #fff;
+  cursor: auto;
+}

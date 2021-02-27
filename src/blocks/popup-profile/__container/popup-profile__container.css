@@ -1,0 +1,6 @@
+@media (max-width: 424px) {
+  .popup-profile__container {
+    width: calc(100% - 40px);
+    padding: 27px 25px;
+  }
+}

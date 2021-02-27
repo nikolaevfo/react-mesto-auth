@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
 import Main from './Main';
@@ -138,15 +138,29 @@ function App() {
   
   // registration and authorization
   const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
 
+  const [headerBtnText, setHeaderBtnText] = useState('');
+  const [headerLinkUrl, setHeaderLinkUrl] = useState('');
+  const history = useHistory();
 
+  function handleLoginInit(params) {
+    
+  }
 
+  // function handlerClickHeaderBtn() {
+  //  history.push('/signup');
+  // }
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
 
         <div className="page">
-          <Header />
+          <Header
+            email={email}
+            onClickHeaderBtn={handlerClickHeaderBtn}
+            btnText={headerBtnText}
+          />
           
           <Switch>
             <ProtectedRoute

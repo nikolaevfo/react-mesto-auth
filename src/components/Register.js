@@ -1,38 +1,24 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Register() {
   
+
   return (
-    <div className="register">
-      
-      {/* <p className="register__welcome">
-        Пожалуйста, зарегистрируйтесь.
-        </p>
-      <p className="register__error">
-        {message}
-      </p>
-      <form onSubmit={handleSubmit} className="register__form">
-        <label htmlFor="username">
-          Логин:
-          </label>
-        <input id="username" name="username" type="text" value={data.username} onChange={handleChange} />
-        <label htmlFor="email">
-          Email:
-          </label>
-        <input id="email" name="email" type="email" value={data.email} onChange={handleChange} />
-        <label htmlFor="password">
-          Пароль:
-          </label>
-        <input id="password" name="password" type="password" value={data.confirmPassword} onChange={handleChange} />
-        <div className="register__button-container">
-          <button type="submit" className="register__link">Зарегистрироваться</button>
-        </div>
-      </form>
-      <div className="register__signin">
-        <p>Уже зарегистрированы?</p>
-        
-      </div> */}
+    <div className="regist form-page">
+      <div className="form-page__container">
+        <h3 className="regist__title form-page__title">Регистрация</h3>
+        <form action="#" name="registForm" className="regist__form form-page__form" >
+          <input type="email" name="registInputEmail" placeholder="Email"
+            className="regist__form-input form-page__input" id="regist-email" required />
+          <span id="regist-email-error" className="form-page__text-error"></span>
+          <input type="password" name="registInputPassword" placeholder="Пароль"
+            className="regist__form-input form-page__input" id="regist-password" required />
+          <span id="regist-password-error" className="form-page__text-error"></span>
+          <button type="submit" className="regist__form-btn form-page__btn">Зарегистрироваться</button>
+          <Link to="/signin" className="button form-page__btn-enter">Уже зарегистрированы? Войти</Link>
+        </form>
+      </div>
     </div>
   )
 }

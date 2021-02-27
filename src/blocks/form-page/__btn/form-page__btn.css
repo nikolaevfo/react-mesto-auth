@@ -11,7 +11,7 @@
   transition: 0.2s;
   border: none;
   outline: none;
-  margin-top: 200px;
+  margin: 200px 0 15px 0;
 }
 
 .form-page__btn:hover {

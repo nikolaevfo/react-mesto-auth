@@ -31,6 +31,9 @@
 
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
+@import url(./blocks/header/__info/header__info.css);
+@import url(./blocks/header/__info-email/header__info-email.css);
+@import url(./blocks/header/__info-link/header__info-link.css);
 
 @import url(./blocks/content/content.css);
 
@@ -68,3 +71,4 @@
 @import url(./blocks/form-page/__input/form-page__input.css);
 @import url(./blocks/form-page/__text-error/form-page__text-error.css);
 @import url(./blocks/form-page/__btn/form-page__btn.css);
+@import url(./blocks/form-page/__btn-enter/form-page__btn-enter.css);

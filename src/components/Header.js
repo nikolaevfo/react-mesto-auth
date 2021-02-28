@@ -9,7 +9,7 @@ function Header(props) {
       <div className="header__info">
         <p className="header__info-email">{props.email}</p>
         <Link to={props.headerLinkUrl} className="header__info-link button" onClick={props.onClick}>{props.btnText}</Link>
-        </div> 
+      </div> 
     </header>
   );
 }

@@ -233,43 +233,43 @@ function App() {
             onClick={handleSignOut}
           />
           
-          <Switch>
-            <ProtectedRoute
-              path='/main'
-              loggedIn={loggedIn}
-              component={Main}
-              email={email}
-              onInit={handleAuthInit}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onEditAvatar={handleEditAvatarClick}
-              handleCardClick={handleCardClick}
-              cards={cards}
-              onCardLike={handleCardLike} 
-              checkCardDelete={checkDeletedCardId}
-              onCardDeleteClick={handleDeleteCardClick}
-            />
-            <Route path="/signin">
-              <Login
-                onLogin={handleLogin}
+          <main className="content">
+            <Switch>
+              <ProtectedRoute
+                path='/main'
+                loggedIn={loggedIn}
+                component={Main}
+                email={email}
                 onInit={handleAuthInit}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                handleCardClick={handleCardClick}
+                cards={cards}
+                onCardLike={handleCardLike} 
+                checkCardDelete={checkDeletedCardId}
+                onCardDeleteClick={handleDeleteCardClick}
               />
-            </Route>
-            <Route path="/signup">
-              <Register
-                onRegister={handleRegister}
-                onInit={handleAuthInit}
-                handleInfoTooltipOpen={handleInfoTooltipOpen}
-                handleIsAuthSuccess={handleIsAuthSuccess}
-                handleIsAuthError={handleIsAuthError}
-              />
-            </Route>
-            <Route exact path="/">
-              {loggedIn ? <Redirect to='/main'/> : <Redirect to='signin'/>}
-            </Route>
-          </Switch>
-
-          
+              <Route path="/signin">
+                <Login
+                  onLogin={handleLogin}
+                  onInit={handleAuthInit}
+                />
+              </Route>
+              <Route path="/signup">
+                <Register
+                  onRegister={handleRegister}
+                  onInit={handleAuthInit}
+                  handleInfoTooltipOpen={handleInfoTooltipOpen}
+                  handleIsAuthSuccess={handleIsAuthSuccess}
+                  handleIsAuthError={handleIsAuthError}
+                />
+              </Route>
+              <Route exact path="/">
+                {loggedIn ? <Redirect to='/main'/> : <Redirect to='signin'/>}
+              </Route>
+            </Switch>
+          </main> 
         </div>
         
         <EditProfilePopup
@@ -311,8 +311,8 @@ function App() {
         onClose={closeAllPopups}
         isAuthSuccess={isAuthSuccess}
         />
-
-        <Footer />
+{/* 
+        <Footer /> */}
       </div >
     </CurrentUserContext.Provider>
   );

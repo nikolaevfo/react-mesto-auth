@@ -5,6 +5,7 @@ function AddPlacePopup(props) {
 
   const [errorTextPlaceInput, setErrorTextPlaceInput] = React.useState('');
   const [errorTextLinkInput, setErrorTextLinkInput] = React.useState('');
+  // const [isFormValid, setIsFormValid] = React.useState(false);
 
   const placeNameRef = React.useRef();
   const placeLinkRef = React.useRef();
@@ -16,11 +17,21 @@ function AddPlacePopup(props) {
     setErrorTextLinkInput('');
   }, [props.isOpen]); 
 
+  // function checkInputValid(input) {
+  //   if (!input.validity.valid) {
+  //     setIsFormValid(false);
+  //   } else {
+  //     setIsFormValid(true);
+  //   }
+  // }
+
   function handlePlaceNameChange() {
     setErrorTextPlaceInput(placeNameRef.current.validationMessage);
+    // checkInputValid(placeNameRef.current);
   }
   function handlePlaceLinkChange() {
     setErrorTextLinkInput(placeLinkRef.current.validationMessage);
+    // checkInputValid(placeLinkRef.current);
   }
 
   function handleSubmit(e) {
@@ -33,12 +44,13 @@ function AddPlacePopup(props) {
   
   return (
     <PopupWithForm
-      classDescription='card'
+      // classDescription='card'
       title='Новое место'
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
       isLoading={props.isLoading}
+      // isFormValid={isFormValid}
       children={
         <>
           <input type="text" name="popupInputPlace" placeholder="Название"

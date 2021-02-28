@@ -5,17 +5,27 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 function EditAvatarPopup(props) {
 
   const currentUser = React.useContext(CurrentUserContext);
-  const avatarLinkRef = React.useRef();
   const [errorTextAvatarInput, setErrorTextAvatarInput] = React.useState('');
-    
+  // const [isFormValid, setIsFormValid] = React.useState(true);
+  
+  const avatarLinkRef = React.useRef();
+
   React.useEffect(() => {
     avatarLinkRef.current.value = currentUser.avatar || '';
     setErrorTextAvatarInput('');
   }, [currentUser, props.isOpen]); 
 
+  // function checkInputValid(input) {
+  //   if (!input.validity.valid) {
+  //     setIsFormValid(false);
+  //   } else {
+  //     setIsFormValid(true);
+  //   }
+  // }
 
   function handleLinkChange() {
-    setErrorTextAvatarInput(avatarLinkRef.current.validationMessage)
+    setErrorTextAvatarInput(avatarLinkRef.current.validationMessage);
+    // checkInputValid(avatarLinkRef.current);
   }
 
   function handleSubmit(e) {
@@ -27,12 +37,13 @@ function EditAvatarPopup(props) {
   
   return (
     <PopupWithForm
-      classDescription='avatar'
+      // classDescription='avatar'
       title='Обновить аватар'
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
       isLoading={props.isLoading}
+      // isFormValid={isFormValid}
       children={
         <>
           <input type="url" name="avatarInputLink" placeholder="Ссылка на картинку"

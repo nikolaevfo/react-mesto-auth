@@ -189,34 +189,21 @@ function App() {
           }
           if (res) {
             setLoggedIn(true);
-            setEmail(res.email)
+            setEmail(res.data.email);
             history.push('/main');
           }
         })
-        .catch(() => history.push('/login'));
+        .catch(() => history.push('/signin'));
     }
   }, []); 
 
-  // const tokenCheck = useCallback(() => {
-  //   const jwt = localStorage.getItem('jwt');
-  //   console.log(jwt);
-  //   if (jwt) {
-  //     auth.checkToken(jwt)
-  //       .then((res) => {
-  //         if (!res || res.statusCode === 400) {
-  //           throw new Error('Токен не передан или передан не в том формате')
-  //         } else if (res.statusCode === 401) {
-  //           throw new Error('Переданный токен некорректен')
-  //         }
-  //         if (res) {
-  //           setLoggedIn(true);
-  //           setEmail(res.email)
-  //           history.push('/main');
-  //         }
-  //       })
-  //       .catch(() => history.push('/login'));
-  //   }
-  // }, [])
+  function handleSignOut() {
+    if (localStorage.getItem('jwt')) {
+      localStorage.removeItem('jwt');
+      setEmail('')
+      setLoggedIn(false);
+    }
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -227,6 +214,7 @@ function App() {
             email={email}
             headerLinkUrl={headerLinkUrl}
             btnText={headerBtnText}
+            onClick={handleSignOut}
           />
           
           <Switch>

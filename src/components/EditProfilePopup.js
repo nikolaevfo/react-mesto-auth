@@ -8,7 +8,7 @@ function EditProfilePopup(props) {
   const [description, setDescription] = React.useState('');
   const [errorTextNameInput, setErrorTextNameInput] = React.useState('');
   const [errorTextAboutInput, setErrorTextAboutInput] = React.useState('');
-  // const [isFormValid, setIsFormValid] = React.useState(true);
+  const [isFormValid, setIsFormValid] = React.useState(true);
 
   const inputNameRef = React.useRef();
   const inputAboutRef = React.useRef();
@@ -20,30 +20,27 @@ function EditProfilePopup(props) {
     setDescription(currentUser.about || '');
     setErrorTextAboutInput('');
     setErrorTextNameInput('');
+    checkFormValid();
   }, [currentUser, props.isOpen]); 
 
-  // function handleFormValid(value) {
-  //   setIsFormValid(value)
-  // }
-
-  // function checkInputValid(input) {
-  //   if (!input.validity.valid) {
-  //     setIsFormValid(false);
-  //   } else {
-  //     setIsFormValid(true);
-  //   }
-  // }
+  function checkFormValid() {
+    if (inputNameRef.current.validity.valid && inputAboutRef.current.validity.valid) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }
 
   function handleNameChange(e) {
     setName(e.target.value);
     setErrorTextNameInput(inputNameRef.current.validationMessage);
-    // checkInputValid(inputNameRef.current);
+    checkFormValid();
   }
   
   function handleDescriptionChange(e) {
     setDescription(e.target.value)
     setErrorTextAboutInput(inputAboutRef.current.validationMessage);
-    // checkInputValid(inputAboutRef.current);
+    checkFormValid();
   }
 
   function handleSubmit(evt) {
@@ -56,14 +53,12 @@ function EditProfilePopup(props) {
 
   return (
     <PopupWithForm
-      // classDescription='profile'
       title='Редактировать профиль'
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
       isLoading={props.isLoading}
-      // isFormValid={isFormValid}
-      // handleFormValid={handleFormValid}
+      isFormValid={isFormValid}
       children={
         <>
           <input type="text" name="popupInputName" placeholder="Введите Ваше имя"

@@ -6,26 +6,27 @@ function EditAvatarPopup(props) {
 
   const currentUser = React.useContext(CurrentUserContext);
   const [errorTextAvatarInput, setErrorTextAvatarInput] = React.useState('');
-  // const [isFormValid, setIsFormValid] = React.useState(true);
+  const [isFormValid, setIsFormValid] = React.useState(true);
   
   const avatarLinkRef = React.useRef();
 
   React.useEffect(() => {
     avatarLinkRef.current.value = currentUser.avatar || '';
     setErrorTextAvatarInput('');
+    checkFormValid();
   }, [currentUser, props.isOpen]); 
 
-  // function checkInputValid(input) {
-  //   if (!input.validity.valid) {
-  //     setIsFormValid(false);
-  //   } else {
-  //     setIsFormValid(true);
-  //   }
-  // }
+  function checkFormValid() {
+    if (avatarLinkRef.current.validity.valid) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }
 
   function handleLinkChange() {
     setErrorTextAvatarInput(avatarLinkRef.current.validationMessage);
-    // checkInputValid(avatarLinkRef.current);
+    checkFormValid();
   }
 
   function handleSubmit(e) {
@@ -37,13 +38,12 @@ function EditAvatarPopup(props) {
   
   return (
     <PopupWithForm
-      // classDescription='avatar'
       title='Обновить аватар'
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
       isLoading={props.isLoading}
-      // isFormValid={isFormValid}
+      isFormValid={isFormValid}
       children={
         <>
           <input type="url" name="avatarInputLink" placeholder="Ссылка на картинку"

@@ -1,19 +1,13 @@
 import React from 'react';
 
-function PopupWithForm(props) {  
+function PopupWithForm(props) {
 
   const formRef = React.useRef();
-  const [isFormValid, setIsFormValid] = React.useState(true);
 
   function handlerSubmitForm(e) {
     props.onSubmit(e);
     formRef.current.reset();
   }
-
-  // React.useEffect(() => {    
-  //   console.log(formRef.current.checkValidity());
-  //   setIsFormValid(formRef.current.checkValidity())
-  // }, []); 
 
   let buttonText = '';
   if(props.isDeletingCard) {
@@ -39,10 +33,10 @@ function PopupWithForm(props) {
           {props.children}
           <button
             type="submit"
-            disabled={`${isFormValid
+            disabled={`${props.isFormValid
               ? ``
               : `true`}`}
-            className={`${isFormValid
+            className={`${props.isFormValid
               ? `popup__btn-add`
               : `popup__btn-add popup__btn-add_invalid`}`}>{buttonText}</button>
         </form>

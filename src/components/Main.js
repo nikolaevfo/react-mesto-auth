@@ -3,6 +3,10 @@ import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
+
+  React.useEffect(() => {
+    props.onInit(props.email, 'Выйти', '')
+  }, []); 
   
   const currentUser = React.useContext(CurrentUserContext);
 

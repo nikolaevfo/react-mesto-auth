@@ -1,6 +1,8 @@
 .form-page {
+  width: 100%;
   padding-top: 60px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  align-self: start;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
@@ -13,6 +13,7 @@ import DeleteCardPopup from './DeleteCardPopup';
 import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
+import * as auth from '../utils/auth';
 
 function App() {
 
@@ -138,19 +139,85 @@ function App() {
   
   // registration and authorization
   const [loggedIn, setLoggedIn] = useState(false);
-  const [email, setEmail] = useState('');
-
-  const [headerBtnText, setHeaderBtnText] = useState('');
-  const [headerLinkUrl, setHeaderLinkUrl] = useState('');
   const history = useHistory();
 
-  function handleLoginInit(params) {
-    
+  const [email, setEmail] = useState('');
+  const [headerBtnText, setHeaderBtnText] = useState('');
+  const [headerLinkUrl, setHeaderLinkUrl] = useState('');
+
+  function handleAuthInit(email, btnText, btnLink) {
+    setEmail(email);
+    setHeaderBtnText(btnText);
+    setHeaderLinkUrl(btnLink);
   }
 
-  // function handlerClickHeaderBtn() {
-  //  history.push('/signup');
-  // }
+  function handleRegister({email, password}) {
+    return auth.register(email, password)
+      .then(res => {
+        if (!res || res.statusCode === 400) {
+          throw new Error('Некорректно заполнено одно из полей')
+        } else {
+          history.push('/signin');
+         }
+      })
+  }
+
+  function handleLogin({email, password}) {
+    return auth.login(email, password)
+      .then(res => {
+        if (!res || res.statusCode === 400) {
+          throw new Error('Не передано одно из полей')
+        } else if (res.statusCode === 401) {
+          throw new Error('Пользователь с email не найден')
+        }
+        if (res.token) {
+          setLoggedIn(true);
+          localStorage.setItem('jwt', res.token);
+         }
+      })
+  }
+
+  React.useEffect(() => {
+    const jwt = localStorage.getItem('jwt'); 
+    if (jwt) {
+      auth.checkToken(jwt)
+        .then((res) => {
+          if (!res || res.statusCode === 400) {
+            throw new Error('Токен не передан или передан не в том формате')
+          } else if (res.statusCode === 401) {
+            throw new Error('Переданный токен некорректен')
+          }
+          if (res) {
+            setLoggedIn(true);
+            setEmail(res.email)
+            history.push('/main');
+          }
+        })
+        .catch(() => history.push('/login'));
+    }
+  }, []); 
+
+  // const tokenCheck = useCallback(() => {
+  //   const jwt = localStorage.getItem('jwt');
+  //   console.log(jwt);
+  //   if (jwt) {
+  //     auth.checkToken(jwt)
+  //       .then((res) => {
+  //         if (!res || res.statusCode === 400) {
+  //           throw new Error('Токен не передан или передан не в том формате')
+  //         } else if (res.statusCode === 401) {
+  //           throw new Error('Переданный токен некорректен')
+  //         }
+  //         if (res) {
+  //           setLoggedIn(true);
+  //           setEmail(res.email)
+  //           history.push('/main');
+  //         }
+  //       })
+  //       .catch(() => history.push('/login'));
+  //   }
+  // }, [])
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
@@ -158,7 +225,7 @@ function App() {
         <div className="page">
           <Header
             email={email}
-            onClickHeaderBtn={handlerClickHeaderBtn}
+            headerLinkUrl={headerLinkUrl}
             btnText={headerBtnText}
           />
           
@@ -167,6 +234,8 @@ function App() {
               path='/main'
               loggedIn={loggedIn}
               component={Main}
+              email={email}
+              onInit={handleAuthInit}
               onEditProfile={handleEditProfileClick}
               onAddPlace={handleAddPlaceClick}
               onEditAvatar={handleEditAvatarClick}
@@ -177,17 +246,23 @@ function App() {
               onCardDeleteClick={handleDeleteCardClick}
             />
             <Route path="/signin">
-              <Login/>
+              <Login
+                onLogin={handleLogin}
+                onInit={handleAuthInit}
+              />
             </Route>
             <Route path="/signup">
-              <Register/>
+              <Register
+                onRegister={handleRegister}
+                onInit={handleAuthInit}
+              />
             </Route>
             <Route exact path="/">
               {loggedIn ? <Redirect to='/main'/> : <Redirect to='signin'/>}
             </Route>
           </Switch>
 
-          <Footer />
+          
         </div>
         
         <EditProfilePopup
@@ -223,7 +298,8 @@ function App() {
         isLoading={isLoading}
         isDeletingCard={isDeletingCard}
         />
-
+        
+        <Footer />
       </div >
     </CurrentUserContext.Provider>    
   );

@@ -9,13 +9,18 @@ function AddPlacePopup(props) {
   const placeNameRef = React.useRef();
   const placeLinkRef = React.useRef();
 
-  function handlePlaceNameChange(e) {
-    setErrorTextPlaceInput(placeNameRef.current.validationMessage)
-    placeNameRef.current.value = e.target.value; 
+  React.useEffect(() => {
+    placeNameRef.current.value = '';
+    placeLinkRef.current.value = '';
+    setErrorTextPlaceInput('');
+    setErrorTextLinkInput('');
+  }, [props.isOpen]); 
+
+  function handlePlaceNameChange() {
+    setErrorTextPlaceInput(placeNameRef.current.validationMessage);
   }
-  function handlePlaceLinkChange(e) {
-    placeLinkRef.current.value = e.target.value;
-    setErrorTextLinkInput(placeLinkRef.current.validationMessage)
+  function handlePlaceLinkChange() {
+    setErrorTextLinkInput(placeLinkRef.current.validationMessage);
   }
 
   function handleSubmit(e) {

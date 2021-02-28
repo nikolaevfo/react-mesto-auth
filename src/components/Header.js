@@ -9,7 +9,6 @@ function Header(props) {
       <div className="header__info">
         <p className="header__info-email">{props.email}</p>
         <Link to={props.headerLinkUrl} className="header__info-link button">{props.btnText}</Link>
-        {/* <button type='button' className="header__info-button button" onClick={props.onClickHeaderBtn}>{props.btnText}</button> */}
       </div> 
     </header>
   );

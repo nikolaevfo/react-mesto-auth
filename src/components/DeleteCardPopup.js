@@ -10,7 +10,6 @@ function DeleteCardPopup(props) {
   
   return (
     <PopupWithForm
-      // classDescription='delete'
       title='Вы уверены?'
       isOpen={props.isOpen}
       onClose={props.onClose}

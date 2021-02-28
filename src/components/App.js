@@ -13,16 +13,20 @@ import DeleteCardPopup from './DeleteCardPopup';
 import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
+import InfoTooltip from './InfoTooltip';
 import * as auth from '../utils/auth';
 
 function App() {
-
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [isAuthSuccess, setIsAuthSuccess] = React.useState(true);
+
   const [selectedCard, setSelectedCard] = React.useState('');
   const [deletedCardId, setDeletedCardId] = React.useState('');
+
   const [isLoading, setIsLoading] = React.useState(false);
   const [isDeletingCard, setIsDeletingCard] = React.useState(false);
 
@@ -58,7 +62,19 @@ function App() {
 
   function handleDeleteCardClick(card) {
     setIsDeletingCard(true);
-    setIsDeleteCardPopupOpen(true);    
+    setIsDeleteCardPopupOpen(true);
+  }
+
+  function handleInfoTooltipOpen() {
+    setIsInfoTooltipOpen(true);
+  }
+
+  function handleIsAuthSuccess() {
+    setIsAuthSuccess(true);
+  }
+
+  function handleIsAuthError() {
+    setIsAuthSuccess(false);
   }
 
   function closeAllPopups() {
@@ -68,6 +84,7 @@ function App() {
     setSelectedCard('');
     setIsDeleteCardPopupOpen(false);
     setIsDeletingCard(false);
+    setIsInfoTooltipOpen(false);
   }
 
   // profile
@@ -136,7 +153,6 @@ function App() {
     })
   }
 
-  
   // registration and authorization
   const [loggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
@@ -243,6 +259,9 @@ function App() {
               <Register
                 onRegister={handleRegister}
                 onInit={handleAuthInit}
+                handleInfoTooltipOpen={handleInfoTooltipOpen}
+                handleIsAuthSuccess={handleIsAuthSuccess}
+                handleIsAuthError={handleIsAuthError}
               />
             </Route>
             <Route exact path="/">
@@ -286,10 +305,16 @@ function App() {
         isLoading={isLoading}
         isDeletingCard={isDeletingCard}
         />
-        
+
+        <InfoTooltip
+        isOpen={isInfoTooltipOpen}
+        onClose={closeAllPopups}
+        isAuthSuccess={isAuthSuccess}
+        />
+
         <Footer />
       </div >
-    </CurrentUserContext.Provider>    
+    </CurrentUserContext.Provider>
   );
 }
 

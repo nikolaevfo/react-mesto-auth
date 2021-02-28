@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 export default function Register(props) {
-
+  
   React.useEffect(() => {
     props.onInit('', 'Войти', '/signin')
   }, []);
@@ -30,11 +30,16 @@ export default function Register(props) {
     }
     props.onRegister({ email: placeEmailRef.current.value, password: placePasswordRef.current.value })
       .then(() => {
-        placeEmailRef.current.value = '';
-        placePasswordRef.current.value = '';
-        history.push('/signin')
+        history.push('/signin');
+        props.handleIsAuthSuccess();
+        props.handleInfoTooltipOpen();
+        console.log('success true');
       })
-      .catch(err => console.log(err))
+      .catch(err => { 
+        props.handleIsAuthError();
+        props.handleInfoTooltipOpen();
+        console.log(err);
+      })
   }
 
   return (

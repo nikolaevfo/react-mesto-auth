@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 export default function Register(props) {
   
   React.useEffect(() => {
-    props.onInit('', 'Войти', '/signin')
-  }, []);
+    props.onInit('Войти', '/signin')
+  }, [props]);
 
   const [errorTextEmailInput, setErrorTextEmailInput] = React.useState('');
   const [errorTextPasswordInput, setErrorTextPasswordInput] = React.useState('');
@@ -20,7 +20,7 @@ export default function Register(props) {
   } 
 
   function handlePasswordChange() {
-    setErrorTextEmailInput(placePasswordRef.current.validationMessage)
+    setErrorTextPasswordInput(placePasswordRef.current.validationMessage)
   }
 
   function handleSubmit(e) {
@@ -32,8 +32,7 @@ export default function Register(props) {
       .then(() => {
         history.push('/signin');
         props.handleIsAuthSuccess();
-        props.handleInfoTooltipOpen();
-        console.log('success true');
+        props.handleInfoTooltipOpen(); 
       })
       .catch(err => { 
         props.handleIsAuthError();

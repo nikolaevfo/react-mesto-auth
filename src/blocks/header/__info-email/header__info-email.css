@@ -6,3 +6,9 @@
   font-size: 18px;
   line-height: 22px;
 }
+
+@media (max-width: 1023px) {
+  .header__info-email {
+    margin: 0 0 18px 0;
+  }
+}

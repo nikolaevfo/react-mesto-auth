@@ -1,0 +1,50 @@
+.header__burger{  
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 3px;
+  background-color: #fff;
+  top: 15px;
+  z-index: 1;
+  transition: 0.5s;
+  top: 11px;
+  transition: 0.5s;
+}
+
+.header__burger.header__btn_active {
+  transform: scale(0);
+}
+
+.header__burger:before,
+.header__burger:after {
+  display: block;
+  content: "";
+  width: 24px;
+  height: 3px;
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+  transition: 0.5s;
+}
+.header__burger_active {
+  height: 0px;
+}
+
+.header__burger:before {
+  top: -9px;
+}
+
+.header__burger:after {
+  top: 7px;
+}
+
+.header__burger_active:before {
+  transform: rotate(45deg);
+  top: 0px;
+  
+}
+
+.header__burger_active:after {
+  transform: rotate(-45deg);
+  top: -3px;
+}

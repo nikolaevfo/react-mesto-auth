@@ -3,3 +3,17 @@
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+@media (max-width: 767px) {
+  .header__info {
+    width: 100%;
+    padding-top: 40px;
+    position: absolute;
+    top: -188px;
+    left: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  }
+}

@@ -1,20 +1,7 @@
 .header {
   padding-top: 45px;
-  max-width: 882px;
   width: 100%;
-  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-@media (max-width: 1023px) {
-  .header {
-    padding: 45px 35px 0;
-  }
-}
-
-@media (max-width: 424px) {
-  .header {
-    padding: 45px 27px 0;
-  }
+  position: relative;
+  transition: 0.5s;
+  box-sizing: border-box;
 }

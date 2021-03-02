@@ -1,7 +1,6 @@
 import React from 'react';
 
 function PopupWithForm(props) {
-
   const formRef = React.useRef();
 
   function handlerSubmitForm(e) {
@@ -33,9 +32,7 @@ function PopupWithForm(props) {
           {props.children}
           <button
             type="submit"
-            disabled={`${props.isFormValid
-              ? ``
-              : `true`}`}
+            disabled={!props.isFormValid}
             className={`${props.isFormValid
               ? `popup__btn-add`
               : `popup__btn-add popup__btn-add_invalid`}`}>{buttonText}</button>

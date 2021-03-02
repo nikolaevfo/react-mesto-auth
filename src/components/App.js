@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
@@ -161,8 +161,7 @@ function App() {
   const [headerBtnText, setHeaderBtnText] = useState('');
   const [headerLinkUrl, setHeaderLinkUrl] = useState('');
 
-  function handleAuthInit(email, btnText, btnLink) {
-    setEmail(email);
+  function handleAuthInit(btnText, btnLink) {   
     setHeaderBtnText(btnText);
     setHeaderLinkUrl(btnLink);
   }
@@ -204,14 +203,14 @@ function App() {
             throw new Error('Переданный токен некорректен')
           }
           if (res) {
-            setLoggedIn(true);
+            setLoggedIn(true); 
             setEmail(res.data.email);
             history.push('/main');
           }
         })
         .catch(() => history.push('/signin'));
     }
-  }, []); 
+  }, [history, loggedIn]); 
 
   function handleSignOut() {
     if (localStorage.getItem('jwt')) {
@@ -270,6 +269,7 @@ function App() {
               </Route>
             </Switch>
           </main> 
+          <Footer />
         </div>
         
         <EditProfilePopup
@@ -310,9 +310,7 @@ function App() {
         isOpen={isInfoTooltipOpen}
         onClose={closeAllPopups}
         isAuthSuccess={isAuthSuccess}
-        />
-{/* 
-        <Footer /> */}
+        />  
       </div >
     </CurrentUserContext.Provider>
   );

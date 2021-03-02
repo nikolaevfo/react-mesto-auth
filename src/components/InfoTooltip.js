@@ -1,5 +1,4 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
 import imgSuccess from '../images/regist-success.svg';
 import imgError from '../images/regist-error.svg';
 

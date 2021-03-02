@@ -5,8 +5,8 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 function Main(props) {
 
   React.useEffect(() => {
-    props.onInit(props.email, 'Выйти', '/signin')
-  }, []); 
+    props.onInit('Выйти', '/signin')
+  }, [props]); 
   
   const currentUser = React.useContext(CurrentUserContext);
 

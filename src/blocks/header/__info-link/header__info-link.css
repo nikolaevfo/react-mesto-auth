@@ -8,3 +8,9 @@
   background: none;
   text-decoration: none;
 }
+
+@media (max-width: 1023px) {
+  .header__info-link {
+    margin: 0 0 40px 0;
+  }
+}

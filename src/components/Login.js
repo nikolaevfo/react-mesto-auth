@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
 export default function Login(props) {
 
@@ -12,8 +11,6 @@ export default function Login(props) {
 
   const placeEmailRef = React.useRef();
   const placePasswordRef = React.useRef();
-
-  const history = useHistory();
 
   function handleEmailChange() {
     setErrorTextEmailInput(placeEmailRef.current.validationMessage)
@@ -29,10 +26,6 @@ export default function Login(props) {
       return;
     }
     props.onLogin({ email: placeEmailRef.current.value, password: placePasswordRef.current.value })
-      .then(() => {
-        history.push('/')
-      })
-      .catch(err => console.log(err))
   }
 
   return (

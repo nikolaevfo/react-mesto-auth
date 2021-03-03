@@ -14,6 +14,20 @@
   margin: 200px 0 15px 0;
 }
 
+@media (max-width: 1600px) {
+  .form-page__btn {
+    margin: 160px 0 15px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .form-page__btn {
+    margin: 140px 0 15px 0;
+  }
+}
+
+
+
 .form-page__btn:hover {
   background: rgba(255, 255, 255, 0.85);
   cursor: pointer;

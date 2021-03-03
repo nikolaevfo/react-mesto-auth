@@ -96,6 +96,7 @@ function App() {
         setIsLoading(false);
         closeAllPopups();
       })
+      .catch((err) => console.log("Ошибка при загрузке данных", err));
   }
 
   // avatar
@@ -106,7 +107,8 @@ function App() {
         setCurrentUser(userData); 
         setIsLoading(false);
         closeAllPopups();
-    })
+      })
+      .catch((err) => console.log("Ошибка при загрузке данных аватара", err));
   }
 
   // cards
@@ -115,7 +117,7 @@ function App() {
       .then((initialCards) => {
         setCards(initialCards);
       })
-      .catch((err) => console.log("Ошибка при загрузке данных", err));
+      .catch((err) => console.log("Ошибка при загрузке данных карточек", err));
   }, []);
 
   function handleCardLike(card) {
@@ -124,7 +126,8 @@ function App() {
       .then((newCard) => {
         const newCards = cards.map((c) => c._id === card._id ? newCard : c);
         setCards(newCards);
-      });
+      })
+      .catch((err) => console.log("Ошибка при загрузке данных", err));
   } 
 
   function checkDeletedCardId(cardId) {
@@ -140,6 +143,7 @@ function App() {
         setIsLoading(false);
         closeAllPopups();
       })
+      .catch((err) => console.log("Ошибка при удалении карточки", err));
   }
 
   // card
@@ -150,8 +154,33 @@ function App() {
         setCards([newCard, ...cards]); 
         setIsLoading(false);
         closeAllPopups();
-    })
+      })
+      .catch((err) => console.log("Ошибка при добавлении карточки", err));
   }
+
+  // закрытие по Esc и оверлею
+  React.useEffect(() => {
+    function handleEscClose(evt) {
+      if (evt.key === "Escape") {
+        closeAllPopups();
+      }
+    }
+    function handleOverlayClose(evt) {
+       if (
+        evt.target.classList.contains("popup") ||
+        evt.target.classList.contains("popup__button-cross")
+      ) {
+        closeAllPopups();
+      }
+    }
+    document.addEventListener("keydown", handleEscClose);
+    document.addEventListener("click", handleOverlayClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+      document.removeEventListener("click", handleOverlayClose);
+    }
+  })
 
   // registration and authorization
   const [loggedIn, setLoggedIn] = useState(false);
@@ -175,6 +204,16 @@ function App() {
           history.push('/signin');
          }
       })
+      .then(() => {
+        history.push('/signin');
+        handleIsAuthSuccess();
+        handleInfoTooltipOpen(); 
+      })
+      .catch(err => { 
+        handleIsAuthError();
+        handleInfoTooltipOpen();
+        console.log("Ошибка при регистрации", err)
+      })
   }
 
   function handleLogin({email, password}) {
@@ -190,6 +229,10 @@ function App() {
           localStorage.setItem('jwt', res.token);
          }
       })
+      .then(() => {
+        history.push('/')
+      })
+      .catch((err) => console.log("Ошибка при входе", err));
   }
 
   React.useEffect(() => {
@@ -259,9 +302,6 @@ function App() {
                 <Register
                   onRegister={handleRegister}
                   onInit={handleAuthInit}
-                  handleInfoTooltipOpen={handleInfoTooltipOpen}
-                  handleIsAuthSuccess={handleIsAuthSuccess}
-                  handleIsAuthError={handleIsAuthError}
                 />
               </Route>
               <Route exact path="/">

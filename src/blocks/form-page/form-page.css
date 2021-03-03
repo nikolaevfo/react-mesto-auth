@@ -6,3 +6,8 @@
   align-items: flex-start;
   align-self: start;
 }
+@media (max-width: 1600px) {
+  .form-page {
+    padding-top: 40px;
+  }
+}

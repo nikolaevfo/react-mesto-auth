@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Register(props) {
   
@@ -12,8 +12,6 @@ export default function Register(props) {
 
   const placeEmailRef = React.useRef();
   const placePasswordRef = React.useRef();
-
-  const history = useHistory();
 
   function handleEmailChange() {
     setErrorTextEmailInput(placeEmailRef.current.validationMessage)
@@ -29,16 +27,6 @@ export default function Register(props) {
       return;
     }
     props.onRegister({ email: placeEmailRef.current.value, password: placePasswordRef.current.value })
-      .then(() => {
-        history.push('/signin');
-        props.handleIsAuthSuccess();
-        props.handleInfoTooltipOpen(); 
-      })
-      .catch(err => { 
-        props.handleIsAuthError();
-        props.handleInfoTooltipOpen();
-        console.log(err);
-      })
   }
 
   return (

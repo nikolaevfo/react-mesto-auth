@@ -26,7 +26,7 @@
 ```
 git clone https://github.com/nikolaevfo/react-mesto-auth.git
 ```
-- Установить пакеты webpack командой npm i
+- Установить сторонние библиотеки командой npm i
 - Запустить вертуальный сервер командой npm run dev
 - Для финальной сборки введите команду npm run build
 - Для работы с проектом у вас должен быть установлен Node.js - https://nodejs.org/en/download/

@@ -4,7 +4,7 @@
 
 ## Доработанный сервис 'Mesto', с возможностью регистрации и авторизации. 
 
-### Ссылка на GH Pages: [Mesto](https://nikolaevfo.github.io/mesto-react/index.html).
+### Ссылка на GH Pages: [Mesto](https://nikolaev.student.nomoredomains.club).
 
 #### В процессе работы использованы:
 - Вёрстка по стандарту HTML5, стили CSS3(Flexbox, Grid)

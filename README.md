@@ -22,9 +22,9 @@
 - Удаление карточки, если она добавлена вами
 
 ### Развёртывание:
-- Клонировать репозиторий командой https://github.com/nikolaevfo/mesto-react
+- Клонировать репозиторий командой https://github.com/nikolaevfo/react-mesto-auth
 ```
-git clone https://github.com/nikolaevfo/mesto-react.git
+git clone https://github.com/nikolaevfo/react-mesto-auth.git
 ```
 - Установить пакеты webpack командой npm i
 - Запустить вертуальный сервер командой npm run dev

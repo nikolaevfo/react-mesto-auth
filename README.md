@@ -4,7 +4,7 @@
 
 ## Доработанный сервис 'Mesto', с возможностью регистрации и авторизации. 
 
-### Ссылка на GH Pages: [Mesto](https://nikolaev.student.nomoredomains.club).
+### Ссылка на сервис: [Mesto](https://nikolaev.student.nomoredomains.club).
 
 #### В процессе работы использованы:
 - Вёрстка по стандарту HTML5, стили CSS3(Flexbox, Grid)
@@ -22,7 +22,7 @@
 - Удаление карточки, если она добавлена вами
 
 ### Развёртывание:
-- Клонировать репозиторий командой https://github.com/nikolaevfo/react-mesto-auth
+- Клонировать репозиторий командой
 ```
 git clone https://github.com/nikolaevfo/react-mesto-auth.git
 ```

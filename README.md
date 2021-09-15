@@ -4,7 +4,6 @@
 
 ## Доработанный сервис 'Mesto', с возможностью регистрации и авторизации. 
 
-### Ссылка на сервис: [Mesto](https://nikolaev.student.nomoredomains.club).
 ### Ссылка на репозиторий бэкенда: [Mesto-API](https://github.com/nikolaevfo/react-mesto-api-full).
 
 #### В процессе работы использованы:
